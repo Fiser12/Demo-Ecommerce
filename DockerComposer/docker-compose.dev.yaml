@@ -19,21 +19,6 @@ services:
           - mysql
     ports:
       - "3307:3306"
-  app-dev:
-    container_name: app-dev
-    image: fiser/base-docker-microservices:app
-    restart: always
-    volumes:
-      -  ../:/app
-      -  ../DockerComposer/logs/dev/App:/app/App/var/log
-    networks:
-      crv_dev_network:
-        aliases:
-          - app
-    env_file:
-      - ../.env.dev
-    depends_on:
-      - mysql-dev
   ecommerce-dev:
     container_name: ecommerce-dev
     image: fiser/base-docker-microservices:ecommerce
@@ -64,8 +49,6 @@ services:
     volumes:
       -  ../:/app
       - ../DockerComposer/logs/dev/Nginx:/var/log/nginx
-    depends_on:
-      - app-dev
     env_file:
       - ../.env.dev
     networks:
